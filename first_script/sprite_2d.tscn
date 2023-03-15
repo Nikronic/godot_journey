@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://byivf1miho646"]
+
+[ext_resource type="Texture2D" uid="uid://cpw07pkvqxe6p" path="res://39251365.jpg" id="1_if8fg"]
+[ext_resource type="Script" path="res://RotatingSprite2D.gd" id="2_vreun"]
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(528, 296)
+scale = Vector2(0.268, 0.268)
+texture = ExtResource("1_if8fg")
+script = ExtResource("2_vreun")
