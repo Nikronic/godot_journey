@@ -1,10 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://byivf1miho646"]
 
-[ext_resource type="Texture2D" uid="uid://cpw07pkvqxe6p" path="res://39251365.jpg" id="1_if8fg"]
+[ext_resource type="Texture2D" uid="uid://d30jh4x42m0w1" path="res://pepega.png" id="1_njaja"]
 [ext_resource type="Script" path="res://RotatingSprite2D.gd" id="2_vreun"]
 
-[node name="Sprite2D" type="Sprite2D"]
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(528, 296)
 scale = Vector2(0.268, 0.268)
-texture = ExtResource("1_if8fg")
+texture = ExtResource("1_njaja")
 script = ExtResource("2_vreun")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 116.0
+offset_bottom = 62.0
+text = "Toggle Movement"
+
+[connection signal="pressed" from="Button" to="Sprite2D" method="_on_button_pressed"]

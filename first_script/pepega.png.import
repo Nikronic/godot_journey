@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpw07pkvqxe6p"
-path="res://.godot/imported/39251365.jpg-7d38b5978f04104e4993aebe5817b70a.ctex"
+uid="uid://d30jh4x42m0w1"
+path="res://.godot/imported/pepega.png-827f7c9479a8eb54a4cbf8914d4fd67f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://39251365.jpg"
-dest_files=["res://.godot/imported/39251365.jpg-7d38b5978f04104e4993aebe5817b70a.ctex"]
+source_file="res://pepega.png"
+dest_files=["res://.godot/imported/pepega.png-827f7c9479a8eb54a4cbf8914d4fd67f.ctex"]
 
 [params]
 
