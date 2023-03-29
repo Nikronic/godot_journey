@@ -6,6 +6,8 @@ var base_mov = 5.0
 
 var move_allowed = true
 
+var cooldown_timer = 3
+
 
 func _process(_delta):
 	# rotate_object(delta)
@@ -51,8 +53,19 @@ func rotate_object(delta):
 
 func _on_button_pressed():
 	# disables/enables arrow keys (no longer can move object)
-	if move_allowed == true:
-		move_allowed = false
-	else:
-		move_allowed = true
+	move_allowed = not move_allowed
+	_reset_timer(3)
+	
+func _ready():
+	var timer = get_node("Timer")
+	timer.timeout.connect(_on_timer_timeout)
+	timer.start(3)
+
+func _on_timer_timeout():
+	move_allowed = false
+
+func _reset_timer(seconds):
+	var timer = get_node("Timer")
+	timer.start(seconds)
+	
 	
