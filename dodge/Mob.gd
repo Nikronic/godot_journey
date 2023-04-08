@@ -1,0 +1,61 @@
+extends Area2D
+
+# mob mov speed
+var base_mov_speed = 300.0
+
+# if game still running
+var move_allowed = true
+
+# rng for mov direction of mobs
+var rng = RandomNumberGenerator.new()
+
+# generate two random numbers for random direction of mob move
+# one rng for top-down, and one for left-right (-1=top/left, 1: down/right)
+var random_x_dir = rng.randi_range(-1, 1)
+var random_y_dir = rng.randi_range(-1, 1)
+var random_anim  = rng.randi_range(0, 2)
+
+# walk, swim, and fly animations for the mob
+@onready var animated_sprite = $AnimatedSprite2D
+
+
+func _process(_delta):
+	# rotate_object(delta)
+	
+	if move_allowed:  # if move allowed (e.g., game not ended)
+		random_move_object(_delta)
+	
+
+func random_move_object(_delta):
+	# The mob's movement vector (init = 0)
+	var velocity = Vector2.ZERO
+
+	velocity.x += float(random_x_dir)
+	velocity.y += float(random_y_dir)
+	
+	
+	# if mob is moving
+	if velocity.length() > 0:
+		velocity = velocity.normalized() * base_mov_speed
+		# random animation
+		animate_sprite(animated_sprite, velocity)
+	# stop animation if no key pressed
+	else:
+		animated_sprite.stop()
+	
+	position += velocity * _delta
+
+# player animation w.r.t. player movement
+func animate_sprite(animated_sprite, velocity: Vector2):
+	# walk, swim, and fly
+	var anim_types = animated_sprite.sprite_frames.get_animation_names()
+	animated_sprite.play(anim_types[random_anim])
+	
+
+func _ready():
+	rng.seed = 8569
+
+# reset after "hit"
+func start(pos):
+	position = pos
+	$CollisionShape2D.disabled = false
