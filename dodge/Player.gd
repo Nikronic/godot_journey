@@ -1,5 +1,8 @@
 extends Area2D
 
+# collision with enemy
+signal hit
+
 # screen size to bound the characters
 var screen_size
 
@@ -68,3 +71,15 @@ func clamp_player_pos(position, screen_size):
 
 func _ready():
 	screen_size = get_viewport_rect().size
+
+# collision detected => "hit"
+func _on_body_entered(body):
+	hit.emit()
+	# Must be deferred as we can't change physics properties on a physics callback
+	$CollisionShape2D.set_deferred("disabled", true)
+	print("Game Over")
+
+# reset after "hit"
+func start(pos):
+	position = pos
+	$CollisionShape2D.disabled = false
