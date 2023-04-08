@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://iflkdyjny4b7"]
+[gd_scene load_steps=12 format=3 uid="uid://iflkdyjny4b7"]
 
 [ext_resource type="Texture2D" uid="uid://7lrtg8vydsjb" path="res://art/playerGrey_walk1.png" id="1_5u1k2"]
+[ext_resource type="Script" path="res://Main.gd" id="1_a24ex"]
 [ext_resource type="Script" path="res://Player.gd" id="1_tp0pt"]
 [ext_resource type="Texture2D" uid="uid://behju3r1ia465" path="res://art/playerGrey_up1.png" id="2_cfafm"]
 [ext_resource type="Texture2D" uid="uid://41v2hwe1g6w5" path="res://art/playerGrey_walk2.png" id="2_vdtwk"]
@@ -36,7 +37,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_yebu0"]
 radius = 23.7065
 
-[node name="Node" type="Node"]
+[sub_resource type="LabelSettings" id="LabelSettings_4pios"]
+font_size = 24
+font_color = Color(1, 0.403922, 0.501961, 1)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_a24ex")
 
 [node name="Player" type="Area2D" parent="."]
 script = ExtResource("1_tp0pt")
@@ -60,9 +68,20 @@ script = ExtResource("7_ysvmc")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Mob"]
 
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+offset_left = 176.0
+offset_top = 388.0
+offset_right = 306.0
+offset_bottom = 425.0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_4pios")
+
 [connection signal="area_shape_entered" from="Player" to="Player" method="_on_area_shape_entered"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="hit" from="Player" to="Player" method="_on_hit"]
+[connection signal="hit" from="Player" to="Mob" method="_on_player_hit"]
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="screen_exited" from="Mob/VisibleOnScreenNotifier2D" to="Mob" method="_on_visible_on_screen_notifier_2d_screen_exited"]
 
 [editable path="Mob"]

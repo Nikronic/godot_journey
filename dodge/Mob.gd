@@ -23,7 +23,6 @@ var random_anim  = rng.randi_range(0, 2)
 func _process(_delta):
 	if move_allowed:  # if move allowed (e.g., game not ended)
 		random_move_object(_delta)
-	
 
 func random_move_object(_delta):
 	# The mob's movement vector (init = 0)
@@ -31,7 +30,6 @@ func random_move_object(_delta):
 	
 	velocity.x += float(random_x_dir)
 	velocity.y += float(random_y_dir)
-	
 	
 	# if mob is moving
 	if velocity.length() > 0:
@@ -59,7 +57,10 @@ func start(pos):
 	position = pos
 	# $CollisionShape2D.disabled = false
 
-
 # delete mob when out of screen
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
+
+# stop mob from mov if "hit" player
+func _on_player_hit():
+	move_allowed = false

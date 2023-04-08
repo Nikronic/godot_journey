@@ -73,7 +73,8 @@ func _ready():
 	screen_size = get_viewport_rect().size
 
 func _on_hit():
-	print("Game Over")
+	move_allowed = false
+	
 
 # reset after "hit"
 func start(pos):
