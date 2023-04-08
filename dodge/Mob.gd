@@ -1,5 +1,6 @@
 extends Area2D
 
+
 # mob mov speed
 var base_mov_speed = 300.0
 
@@ -59,3 +60,8 @@ func _ready():
 func start(pos):
 	position = pos
 	$CollisionShape2D.disabled = false
+
+
+# delete mob when out of screen
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()
