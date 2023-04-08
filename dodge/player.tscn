@@ -36,7 +36,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_yebu0"]
 radius = 23.7065
 
-[node name="Node2D" type="Node2D"]
+[node name="Node" type="Node"]
 
 [node name="Player" type="Area2D" parent="."]
 script = ExtResource("1_tp0pt")
@@ -58,7 +58,11 @@ metadata/_edit_group_ = true
 [node name="Mob" parent="." instance=ExtResource("6_jy4ta")]
 script = ExtResource("7_ysvmc")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Mob"]
+
+[connection signal="area_shape_entered" from="Player" to="Player" method="_on_area_shape_entered"]
 [connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
 [connection signal="hit" from="Player" to="Player" method="_on_hit"]
+[connection signal="screen_exited" from="Mob/VisibleOnScreenNotifier2D" to="Mob" method="_on_visible_on_screen_notifier_2d_screen_exited"]
 
 [editable path="Mob"]

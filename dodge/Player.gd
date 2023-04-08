@@ -72,14 +72,16 @@ func clamp_player_pos(position, screen_size):
 func _ready():
 	screen_size = get_viewport_rect().size
 
-# collision detected => "hit"
-func _on_body_entered(body):
-	hit.emit()
-	# Must be deferred as we can't change physics properties on a physics callback
-	$CollisionShape2D.set_deferred("disabled", true)
+func _on_hit():
 	print("Game Over")
 
 # reset after "hit"
 func start(pos):
 	position = pos
 	$CollisionShape2D.disabled = false
+
+# collision detected => "hit"
+func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	hit.emit()
+	# Must be deferred as we can't change physics properties on a physics callback
+	$CollisionShape2D.set_deferred("disabled", true)
